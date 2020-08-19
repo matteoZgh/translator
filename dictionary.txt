@@ -11,3 +11,10 @@
 非常:very
 餐饮:food
 水果:fruit
+图片:image
+图片:picture
+图片:pictures
+画:draw
+华:China
+中国:China
+中国人:Chinese people

@@ -7,14 +7,15 @@ from fileutils import *
 
 class Trans :
     def __init__(self) :
-        self.zedb, self.ezdb = self.__loaddb(path='/home/matteo/Code/python/dictionary.txt')
+        self.path = '/home/matteo/Downloads/translator/dictionary.txt'
+        self.zedb, self.ezdb = self.__loaddb(path=self.path)
         self.adb = {}
 
 
     def trans(self, source) :
         self.source = source
         self.text = self.__translate()
-        self.__savedb(path='/home/matteo/Code/python/dictionary.txt')
+        self.__savedb(path=self.path)
 
 
     @Read
@@ -23,9 +24,30 @@ class Trans :
         en_zh = {}
         for line in file.readlines() :
             word = line.replace('\n','').split(':')
-            zh_en[word[0]] = word[1]
-            en_zh[word[1]] = word[0]
+            if word[0] in zh_en :
+                tmp = zh_en[word[0]]
+                zh_en[word[0]] = tmp + ', ' + word[1]
+            else :
+                zh_en[word[0]] = word[1]
+            if word[1] in en_zh :
+                tmp = en_zh[word[1]]
+                en_zh[word[1]] = tmp + ', ' + word[0]
+            else :
+                en_zh[word[1]] = word[0]
         return zh_en, en_zh
+
+
+    @Add
+    def __savedb(self, file) :
+        if self.adb :
+            for zh, en in self.adb.items() :
+                s = zh + ':' + en + '\n'
+                file.write(s)
+
+
+    def getdb(self) :
+        for zh, en in self.zedb.items() :
+            print(zh, en)
 
 
     def __translate(self) :
@@ -51,22 +73,9 @@ class Trans :
         return text
 
 
-    @Add
-    def __savedb(self, file) :
-        if self.adb :
-            for zh, en in self.adb.items() :
-                s = zh + ':' + en + '\n'
-                file.write(s)
-
-
-    def getdb(self) :
-        for zh, en in self.zedb.items() :
-            print(zh, en)
-
-
 if __name__ == '__main__' :
     cmd = sys.argv[1]
-    if cmd == 'g' :
+    if cmd == 'gdb' :
         trans = Trans()
         trans.getdb()
     else :
