@@ -18,3 +18,8 @@
 华:China
 中国:China
 中国人:Chinese people
+视频:vedio
+脉冲:pulse
+阿尔萨:alsa
+阿尔萨:ALSA
+没有文本:No text

@@ -7,7 +7,7 @@ from fileutils import *
 
 class Trans :
     def __init__(self) :
-        self.path = '/home/matteo/Downloads/translator/dictionary.txt'
+        self.path = '/home/matteo/Github/translator/dictionary.txt'
         self.zedb, self.ezdb = self.__loaddb(path=self.path)
         self.adb = {}
 
